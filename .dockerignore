@@ -1,0 +1,8 @@
+.git
+.claude
+*.db
+*.sqlite
+/uploads/
+/bin/
+*.exe
+termtext-codebase-flowchart.html

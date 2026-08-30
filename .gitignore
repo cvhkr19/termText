@@ -1,0 +1,6 @@
+*.exe
+*.db
+*.sqlite
+/bin/
+/uploads/
+.claude/settings.local.json

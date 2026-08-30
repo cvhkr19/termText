@@ -1,0 +1,24 @@
+services:
+  server:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      # Named volume, not a bind mount, so it works identically on any
+      # host — Docker manages where it actually lives on disk. This is
+      # what makes the SQLite file and uploaded files survive
+      # `docker compose down` / image rebuilds.
+      - termtext-data:/data
+    environment:
+      # Set this to your real domain once you're behind Caddy/nginx —
+      # empty refuses every browser Origin (native clients are
+      # unaffected either way). See SECURITY.md.
+      ALLOWED_ORIGINS: ""
+      # Uncomment to require this code on /register — leave unset for
+      # open self-registration.
+      # REGISTRATION_CODE: "change-me"
+      MAX_UPLOAD_SIZE: "25MB"
+    restart: unless-stopped
+
+volumes:
+  termtext-data:

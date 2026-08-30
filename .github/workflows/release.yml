@@ -1,0 +1,66 @@
+name: release
+
+# Pushing a tag like v0.1.0 builds the client for every major OS/arch and
+# attaches each binary to a GitHub Release for that tag. The server isn't
+# built here — it ships as a Docker image (see Dockerfile), not a
+# downloaded binary.
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish under (e.g. v0.1.0) — the tag doesn't need to exist yet, this creates it"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - goos: linux
+            goarch: amd64
+          - goos: linux
+            goarch: arm64
+          - goos: darwin
+            goarch: amd64
+          - goos: darwin
+            goarch: arm64
+          - goos: windows
+            goarch: amd64
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26"
+
+      - name: Build client
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          # CGO_ENABLED=0: the client has no cgo dependency either, so
+          # every target cross-compiles from this one Ubuntu runner with
+          # no per-OS toolchain needed.
+          CGO_ENABLED: 0
+        run: |
+          mkdir -p dist
+          ext=""
+          if [ "${{ matrix.goos }}" = "windows" ]; then ext=".exe"; fi
+          out="termtext-client-${{ matrix.goos }}-${{ matrix.goarch }}${ext}"
+          go build -trimpath -ldflags="-s -w" -o "dist/${out}" ./client
+          echo "ASSET=dist/${out}" >> "$GITHUB_ENV"
+
+      - name: Attach to release
+        uses: softprops/action-gh-release@v2
+        with:
+          # Manual runs (workflow_dispatch) carry no tag in the ref, so the
+          # tag has to come from the input instead; a real tag push already
+          # has it as github.ref_name.
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          files: ${{ env.ASSET }}
