@@ -5,15 +5,12 @@ Go WebSocket relay server and a [Bubble Tea](https://github.com/charmbracelet/bu
 TUI client. No external chat SDK: the protocol, the hub, and the relay logic
 are all hand-written.
 
-```
- ┌─ contacts ──────┐ ┌─ conversation ─────────────────────────────┐
- │ ● alice          │ │                        hey, you around?    │
- │ ○ bob            │ │                                  17:04 ✓✓  │
- │                  │ │  yep, what's up                            │
- │                  │ │  17:05                                     │
- └──────────────────┘ └─────────────────────────────────────────────┘
-   message, or /add <username>
-```
+<table>
+<tr>
+<td><b>alice's terminal</b><br><img src="assets/demo-alice.gif" width="420"></td>
+<td><b>doe's terminal</b><br><img src="assets/demo-doe.gif" width="420"></td>
+</tr>
+</table>
 
 ## Features
 
