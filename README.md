@@ -56,8 +56,8 @@ Flags:
 ## Running your own server
 
 ```
-git clone https://github.com/you/termtext
-cd termtext
+git clone https://github.com/cvhkr19/termText
+cd termText
 docker compose up -d --build
 ```
 
@@ -93,8 +93,8 @@ binary directly.
 Requires Go 1.26+.
 
 ```
-git clone https://github.com/you/termtext
-cd termtext
+git clone https://github.com/cvhkr19/termText
+cd termText
 go build -o bin/termtext-server ./server
 go build -o bin/termtext-client ./client
 ```

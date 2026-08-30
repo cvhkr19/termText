@@ -36,8 +36,8 @@ commands with `sudo` for now).
 ## 3. Get the code and start the server
 
 ```
-git clone https://github.com/you/termtext
-cd termtext
+git clone https://github.com/cvhkr19/termText
+cd termText
 docker compose up -d --build
 ```
 
