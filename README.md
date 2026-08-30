@@ -7,8 +7,8 @@ are all hand-written.
 
 <table>
 <tr>
-<td><b>alice's terminal</b><br><img src="assets/demo-alice.gif" width="420"></td>
-<td><b>doe's terminal</b><br><img src="assets/demo-doe.gif" width="420"></td>
+<td><b>alice's terminal</b><br><img src="assets/demo-alice.gif" width="360"></td>
+<td><b>doe's terminal</b><br><img src="assets/demo-doe.gif" width="360"></td>
 </tr>
 </table>
 
