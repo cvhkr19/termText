@@ -1,6 +1,6 @@
 # termtext
 
-A WhatsApp-style real-time chat app that runs entirely in the terminal — a
+A real-time chat app that runs entirely in the terminal — a
 Go WebSocket relay server and a [Bubble Tea](https://github.com/charmbracelet/bubbletea)
 TUI client. No external chat SDK: the protocol, the hub, and the relay logic
 are all hand-written.
